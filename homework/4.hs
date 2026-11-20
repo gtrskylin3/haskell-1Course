@@ -114,3 +114,25 @@ ghci> test4Solution
 4
 *** Exception: Мажорирующего элемента в списке нет.
 -}
+
+
+{-Задание 5-}
+freqCount [] = []
+freqCount (x:xs) = (x, freqElCount x (x:xs)) : freqCount ([t |t <- xs, t /= x])
+    where 
+        freqElCount _ [] = 0
+        freqElCount el (x:xs) 
+            | el == x = 1 + freqElCount el (xs)
+            | otherwise = freqElCount el (xs)
+{-Проверка-}
+test5Solution :: IO ()
+test5Solution = do
+    print (freqCount [1,1,1,1,4,5,6])
+    print (freqCount [1,2,3,4,4,4,4,1])
+{-
+Результат: 
+ghci> test5Solution 
+[(1,4),(4,1),(5,1),(6,1)]
+[(1,2),(2,1),(3,1),(4,4)]  
+-}
+
